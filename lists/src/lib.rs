@@ -44,15 +44,13 @@ impl List {
 
         loop {
             match current {
-                Link::Empty => break,
+                Link::Empty => return count,
                 Link::More(node) => {
                     current = &node.next;
                     count += 1;
                 }
             }
-        }
-
-        return count;
+        };
     }
 
     pub fn elem_at(&mut self, idx: i32) -> Option<i32> {
