@@ -54,8 +54,22 @@ impl List {
     }
 
     pub fn elem_at(&mut self, idx: i32) -> Option<i32> {
-        // implement this function for problem 3
-        unimplemented!()
+        let mut current = &self.head;
+        let mut count = 0;
+
+        loop {
+            match current {
+                Link::Empty => return None,
+                Link::More(node) => {
+                    if count == idx {
+                        return Some(node.elem);
+                    }
+
+                    current = &node.next;
+                    count += 1;
+                }
+            }
+        };
     }
 
     pub fn insert(&mut self, idx: i32, elem: i32) {
