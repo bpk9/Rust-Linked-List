@@ -39,8 +39,20 @@ impl List {
     }
 
     pub fn size(&self) -> u32 {
-        // implement this function for problem 2
-        unimplemented!()
+        let mut current = &self.head;
+        let mut count = 0;
+
+        loop {
+            match current {
+                Link::Empty => break,
+                Link::More(node) => {
+                    current = &node.next;
+                    count += 1;
+                }
+            }
+        }
+
+        return count;
     }
 
     pub fn elem_at(&mut self, idx: i32) -> Option<i32> {
