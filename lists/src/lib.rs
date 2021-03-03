@@ -73,19 +73,25 @@ impl List {
     }
 
     pub fn insert(&mut self, idx: i32, elem: i32) {
+        let size = self.size() as i32;
         let mut current = &mut self.head;
         let mut count = 0;
-
-        if idx == 0 {
+        let mut index = idx;
+        
+        if index <= 0 {
             self.push(elem);
             return;
+        }
+
+        if index > size {
+            index = size;
         }
 
         loop {
             match current {
                 Link::Empty => return,
                 Link::More(node) => {
-                    if (count+1) == idx {
+                    if (count+1) == index {
                         let new_node = Box::new(Node {
                             elem: elem,
                             next: mem::replace(&mut node.next, Link::Empty),
