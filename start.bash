@@ -1,0 +1,1 @@
+cd lists && cargo build --verbose && cargo test
