@@ -78,13 +78,13 @@ impl List {
         let mut count = 0;
         let mut index = idx;
         
+        if index > size {
+            index = size;
+        }
+        
         if index <= 0 {
             self.push(elem);
             return;
-        }
-
-        if index > size {
-            index = size;
         }
 
         loop {
