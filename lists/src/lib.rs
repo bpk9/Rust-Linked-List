@@ -102,8 +102,34 @@ impl List {
     }
 
     pub fn delete(&mut self, idx: i32) {
-        // implement this function for problem 5
-        unimplemented!()
+        let mut current = &mut self.head;
+        let mut count = 0;
+
+        if idx == 0 {
+            self.pop();
+            return;
+        }
+
+        loop {
+            match current {
+                Link::Empty => return,
+                Link::More(node) => {
+                    if (count+1) == idx {
+                        let next = &mut node.next;
+                        match next {
+                            Link::Empty => return,
+                            Link::More(next_node) => {
+                                node.next = mem::replace(&mut next_node.next, Link::Empty);
+                                return;
+                            }
+                        }
+                    }
+
+                    current = &mut node.next;
+                    count += 1;
+                }
+            }
+        };
     }
 }
 
