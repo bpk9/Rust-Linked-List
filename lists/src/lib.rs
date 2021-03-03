@@ -73,8 +73,32 @@ impl List {
     }
 
     pub fn insert(&mut self, idx: i32, elem: i32) {
-        // implement this function for problem 4
-        unimplemented!()
+        let mut current = &mut self.head;
+        let mut count = 0;
+
+        if idx == 0 {
+            self.push(elem);
+            return;
+        }
+
+        loop {
+            match current {
+                Link::Empty => return,
+                Link::More(node) => {
+                    if (count+1) == idx {
+                        let new_node = Box::new(Node {
+                            elem: elem,
+                            next: mem::replace(&mut node.next, Link::Empty),
+                        });
+                        node.next = Link::More(new_node);
+                        return;
+                    }
+
+                    current = &mut node.next;
+                    count += 1;
+                }
+            }
+        };
     }
 
     pub fn delete(&mut self, idx: i32) {
